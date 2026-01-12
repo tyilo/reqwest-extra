@@ -1,0 +1,20 @@
+[package]
+name = "reqwest-extra"
+version = "0.1.1"
+edition = "2024"
+rust-version = "1.85.0"
+authors = ["Asger Hautop Drewsen <asger@tyilo.com>"]
+license = "MIT OR Apache-2.0"
+readme = "README.md"
+repository = "https://github.com/tyilo/reqwest-extra"
+description = "Extra utilities for reqwest"
+categories = ["web-programming::http-client"]
+keywords = ["http", "request", "client", "reqwest"]
+
+[dependencies]
+bytes = { version = "1.11.0", default-features = false }
+reqwest = { version = "0.13.1", default-features = false }
+
+[dev-dependencies]
+reqwest = { version = "0.13.1" }
+tokio = { version = "1.49.0", features = ["full"] }

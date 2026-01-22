@@ -32,8 +32,8 @@ use reqwest::Response;
 ///
 /// # #[tokio::main]
 /// # async fn main() {
-///     let err = fetch_string("https://api.github.com/user").await.unwrap_err();
-///     println!("{err}");
+/// let err = fetch_string("https://api.github.com/user").await.unwrap_err();
+/// println!("{err}");
 /// # }
 /// ```
 ///

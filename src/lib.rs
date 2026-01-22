@@ -51,37 +51,44 @@ pub struct ErrorWithBody {
 
 impl ErrorWithBody {
     /// Get a reference to the inner [`reqwest::Error`].
+    #[must_use]
     pub fn inner(&self) -> &reqwest::Error {
         &self.inner
     }
 
     /// Get a mutable reference to the inner [`reqwest::Error`].
+    #[must_use]
     pub fn inner_mut(&mut self) -> &mut reqwest::Error {
         &mut self.inner
     }
 
     /// Consume the `ErrorWithBody`, returning the inner [`reqwest::Error`].
+    #[must_use]
     pub fn into_inner(self) -> reqwest::Error {
         self.inner
     }
 
     /// Get a reference to the response body, if available.
+    #[must_use]
     pub fn body(&self) -> Option<&Result<Bytes, reqwest::Error>> {
         self.body.as_ref()
     }
 
     /// Get a mutable reference to the response body, if available.
+    #[must_use]
     pub fn body_mut(&mut self) -> Option<&mut Result<Bytes, reqwest::Error>> {
         self.body.as_mut()
     }
 
     /// Consume the `ErrorWithBody`, returning the response body, if available.
+    #[must_use]
     pub fn into_body(self) -> Option<Result<Bytes, reqwest::Error>> {
         self.body
     }
 
     /// Consume the `ErrorWithBody`, returning both the inner [`reqwest::Error`]
     /// and the response body, if available.
+    #[must_use]
     pub fn into_parts(self) -> (reqwest::Error, Option<Result<Bytes, reqwest::Error>>) {
         (self.inner, self.body)
     }

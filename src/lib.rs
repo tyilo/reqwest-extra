@@ -2,6 +2,8 @@
 #![warn(missing_docs)]
 //! Extra utilities for [`reqwest`](https://crates.io/crates/reqwest).
 
+pub use reqwest;
+
 use std::{error::Error, fmt::Display};
 
 use bytes::Bytes;

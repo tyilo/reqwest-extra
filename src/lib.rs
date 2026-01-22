@@ -55,6 +55,11 @@ impl ErrorWithBody {
         &self.inner
     }
 
+    /// Get a mutable reference to the inner [`reqwest::Error`].
+    pub fn inner_mut(&mut self) -> &mut reqwest::Error {
+        &mut self.inner
+    }
+
     /// Consume the `ErrorWithBody`, returning the inner [`reqwest::Error`].
     pub fn into_inner(self) -> reqwest::Error {
         self.inner
@@ -63,6 +68,11 @@ impl ErrorWithBody {
     /// Get a reference to the response body, if available.
     pub fn body(&self) -> Option<&Result<Bytes, reqwest::Error>> {
         self.body.as_ref()
+    }
+
+    /// Get a mutable reference to the response body, if available.
+    pub fn body_mut(&mut self) -> Option<&mut Result<Bytes, reqwest::Error>> {
+        self.body.as_mut()
     }
 
     /// Consume the `ErrorWithBody`, returning the response body, if available.
@@ -74,6 +84,25 @@ impl ErrorWithBody {
     /// and the response body, if available.
     pub fn into_parts(self) -> (reqwest::Error, Option<Result<Bytes, reqwest::Error>>) {
         (self.inner, self.body)
+    }
+
+    /// Add a url related to this error (overwriting any existing).
+    #[must_use]
+    pub fn with_url(self, url: reqwest::Url) -> Self {
+        ErrorWithBody {
+            inner: self.inner.with_url(url),
+            body: self.body,
+        }
+    }
+
+    /// Strip the related url from this error (if, for example, it contains
+    /// sensitive information).
+    #[must_use]
+    pub fn without_url(self) -> Self {
+        ErrorWithBody {
+            inner: self.inner.without_url(),
+            body: self.body,
+        }
     }
 }
 
